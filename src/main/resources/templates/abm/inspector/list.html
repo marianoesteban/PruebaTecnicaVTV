@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='ABM Inspectores')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+
+    <h2>Inspectores</h2>
+    <div th:replace="layout :: flashMessages"></div>
+    <p class="button-agregar">
+        <a class="btn btn-success btn-lg" href="add.html" th:href="@{/abm/inspectores/agregar}">Agregar inspector</a>
+    </p>
+    <div class="lista-abm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inspector : ${inspectores}">
+                    <th class="align-middle" scope="row" th:text="${inspector.dni}" />
+                    <td class="align-middle" th:text="${inspector.nombres}" />
+                    <td class="align-middle" th:text="${inspector.apellido}" />
+                    <td><a class="btn btn-sm btn-primary" href="edit.html" th:href=@{/abm/inspectores/editar/{id}(id=${inspector.id})}>Editar</a></td>
+                    <td><a class="btn btn-sm btn-danger" th:href=@{/abm/inspectores/eliminar/{id}(id=${inspector.id})} onclick="return confirm('¿Está seguro que quiere eliminar el inspector?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+    
+    <div th:replace="layout :: scripts">Scripts</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Informes propietarios')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+
+    <h2>Propietarios</h2>
+    <div class="lista-abm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Inspecciones realizadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="propietario : ${propietarios}">
+                    <th class="align-middle" scope="row" th:text="${propietario.dni}" />
+                    <td class="align-middle" th:text="${propietario.nombres}" />
+                    <td class="align-middle" th:text="${propietario.apellido}" />
+                    <td><a class="btn btn-sm btn-info" href="inspecciones.html" th:href=@{/informes/propietarios/inspecciones/{id}(id=${propietario.id})}>Ver inspecciones realizadas</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+    
+    <div th:replace="layout :: scripts">Scripts</div>
+</body>
+</html>

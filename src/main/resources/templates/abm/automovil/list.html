@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='ABM Automóviles')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+
+    <h2>Automóviles</h2>
+    <div th:replace="layout :: flashMessages"></div>
+    <p class="button-agregar">
+        <a class="btn btn-success btn-lg" href="add.html" th:href="@{/abm/automoviles/agregar}">Agregar automóvil</a>
+    </p>
+    <div class="lista-abm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Dominio</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="automovil : ${automoviles}">
+                    <th class="align-middle" scope="row" th:text="${automovil.dominio}" />
+                    <td class="align-middle" th:text="${automovil.marca}" />
+                    <td class="align-middle" th:text="${automovil.modelo}" />
+                    <td class="align-middle" th:text="${automovil.propietario.nombres} + ' ' + ${automovil.propietario.apellido}" />
+                    <td><a class="btn btn-sm btn-primary" href="edit.html" th:href=@{/abm/automoviles/editar/{id}(id=${automovil.id})}>Editar</a></td>
+                    <td><a class="btn btn-sm btn-danger" th:href="@{/abm/automoviles/eliminar/{id}(id=${automovil.id})}" onclick="return confirm('¿Está seguro que quiere eliminar el automóvil?')">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+    
+    <div th:replace="layout :: scripts">Scripts</div>
+</body>
+</html>

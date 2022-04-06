@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Informes inspectores')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+
+    <h2>Inspectores</h2>
+    <div class="lista-abm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Ver inspecciones recientes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inspector : ${inspectores}">
+                    <th class="align-middle" scope="row" th:text="${inspector.dni}" />
+                    <td class="align-middle" th:text="${inspector.nombres}" />
+                    <td class="align-middle" th:text="${inspector.apellido}" />
+                    <td><a class="btn btn-sm btn-info" href="recent-inspecciones.html" th:href=@{/informes/inspectores/ultimos-tres-dias/{id}(id=${inspector.id})}>Inspecciones en los últimos tres días</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+    
+    <div th:replace="layout :: scripts">Scripts</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Agregar inspector')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+    
+    <div class="container">
+        <h2>Agregar inspector</h2>
+        <form th:object="${inspector}" method="POST">
+            <div class="form-group">
+                <label for="inputDni">DNI</label>
+                <input type="number" class="form-control" id="inputDni" th:field="*{dni}" required />
+            </div>
+            <div class="form-group">
+                <label for="inputNombres">Nombres</label>
+                <input type="text" class="form-control" id="inputNombres" th:field="*{nombres}" required />
+            </div>
+            <div class="form-group">
+                <label for="inputApellido">Apellido</label>
+                <input type="text" class="form-control" id="inputApellido" th:field="*{apellido}" required />
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Agregar</button>
+        </form>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+</body>
+</html>

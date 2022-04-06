@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Agregar automóvil')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+    
+    <div class="container">
+        <h2>Agregar automóvil</h2>
+        <form th:object="${automovil}" method="POST">
+            <div class="form-group">
+                <label for="inputDominio">Dominio</label>
+                <input type="text" class="form-control" id="inputDominio" th:field="*{dominio}" th:required="required" />
+            </div>
+            <div class="form-group">
+                <label for="inputMarca">Marca</label>
+                <input type="text" class="form-control" id="inputMarca" th:field="*{marca}" th:required="required" />
+            </div>
+            <div class="form-group">
+                <label for="inputModelo">Modelo</label>
+                <input type="text" class="form-control" id="inputModelo" th:field="*{modelo}" th:required="required" />
+            </div>
+            <div class="form-group">
+                <label for="selectPropietario">Propietario</label>
+                <select class="form-control" id="selectPropietario" th:field="*{propietario.id}">
+                    <option th:each="propietario: ${propietarios}"
+                            th:value="${propietario.id}"
+                            th:text="${propietario.nombres} + ' ' + ${propietario.apellido} + ' (DNI ' + ${propietario.dni} + ')'">Nombre del propietario</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Agregar</button>
+        </form>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+</body>
+</html>

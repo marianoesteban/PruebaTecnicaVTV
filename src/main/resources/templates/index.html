@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Inicio')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+    
+    <div th:replace="layout :: flashMessages"></div>
+    
+    <div class="menu-principal">
+        <a class="btn btn-primary btn-block btn-lg item-menu-principal button-inspeccion" href="inspeccion.html" th:href="@{/inspeccionar}">Realizar inspección</a>
+        <h2>ABM</h2>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="abm/propietario/list.html" th:href="@{/abm/propietarios}">Propietarios</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="abm/automovil/list.html" th:href="@{/abm/automoviles}">Automóviles</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="abm/inspector/list.html" th:href="@{/abm/inspectores}">Inspectores</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="abm/inspeccion/list.html" th:href="@{/abm/inspecciones}">Inspecciones</a>
+        
+        <h2>Informes</h2>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="informes/inspeccion/recent.html" th:href="@{/informes/inspecciones/ultima-semana}">Autos inspeccionados en la última semana</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="informes/inspector/all.html" th:href="@{/informes/inspectores}">Inspectores</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="informes/propietario/all.html" th:href="@{/informes/propietarios}">Propietarios</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="informes/automovil/estado.html" th:href="@{/informes/automoviles/aptos}">Autos aptos</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="informes/automovil/estado.html" th:href="@{/informes/automoviles/condicionales}">Autos condicionales</a>
+        <a class="btn btn-secondary btn-block btn-lg item-menu-principal" href="informes/automovil/estado.html" th:href="@{/informes/automoviles/rechazados}">Autos rechazados</a>
+    </div>
+    
+    <div th:replace="layout :: scripts">Scripts</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Inspecciones por propietario')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+
+    <h2 th:text="'Inspecciones realizadas por ' + ${propietario.nombres} + ' ' + ${propietario.apellido}" />
+    <div class="lista-informe">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Automóvil</th>
+                    <th scope="col">Inspector</th>
+                    <th scope="col">Fecha de inspección</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inspeccion : ${inspecciones}">
+                    <th scope="row" th:text="${inspeccion.automovil.dominio}" />
+                    <td th:text="${inspeccion.automovil.marca} + ' ' + ${inspeccion.automovil.modelo}" />
+                    <td th:text="${inspeccion.inspector.nombres} + ' ' + ${inspeccion.inspector.apellido}" />
+                    <td th:text="${inspeccion.fechaInspeccion}" />
+                    <td th:text="${inspeccion.estadoInspeccion}" />
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+    
+    <div th:replace="layout :: scripts">Scripts</div>
+</body>
+</html>

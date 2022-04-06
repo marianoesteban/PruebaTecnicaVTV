@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Agregar inspección')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+    
+    <div class="container">
+        <h2>Agregar inspección</h2>
+        <form th:object="${inspeccion}" method="POST">
+            <div class="form-group">
+                <label for="inputNroInspeccion">Número de inspección</label>
+                <input type="number" class="form-control" id="inputNroInspeccion" th:field="*{nroInspeccion}" required />
+            </div>
+            <div class="form-group">
+                <label for="inputFecha">Fecha</label>
+                <input type="date" class="form-control" id="inputFecha" th:field="*{fechaInspeccion}" required />
+            </div>
+            <div class="form-group">
+                <label for="selectEstado">Estado</label>
+                <select class="form-control" id="selectEstado" th:field="*{estadoInspeccion}">
+                    <option value="Apto">Apto</option>
+                    <option value="Condicional">Condicional</option>
+                    <option value="Rechazado">Rechazado</option>
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="inputExento" th:field="*{estaExento}" />
+                <label for="inputExento">Exento</label>
+            </div>
+            <div class="form-group">
+                <label for="selectInspector">Inspector a cargo</label>
+                <select class="form-control" id="selectInspector" th:field="*{inspector.id}">
+                    <option th:each="inspector: ${inspectores}"
+                            th:value="${inspector.id}"
+                            th:text="${inspector.nombres} + ' ' + ${inspector.apellido} + ' (DNI ' + ${inspector.dni} + ')'">Nombre del inspector</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectAutomovil">Automóvil inspeccionado (patente)</label>
+                <select class="form-control" id="selectAutomovil" th:field="*{automovil.id}">
+                    <option th:each="automovil: ${automoviles}"
+                            th:value="${automovil.id}"
+                            th:text="${automovil.dominio}">Patente del automóvil</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Agregar</button>
+        </form>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+</body>
+</html>
