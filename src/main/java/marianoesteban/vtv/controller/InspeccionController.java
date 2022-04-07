@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marianoesteban.vtv.dto.MedicionesDto;
 import marianoesteban.vtv.dto.ObservacionesDto;
-import marianoesteban.vtv.model.Control;
 import marianoesteban.vtv.model.Inspeccion;
 import marianoesteban.vtv.service.AutomovilService;
 import marianoesteban.vtv.service.InspeccionService;
@@ -48,10 +47,9 @@ public class InspeccionController {
 	public String realizarInspeccion(@ModelAttribute Inspeccion inspeccion,
 			@ModelAttribute ObservacionesDto observacionesForm, @ModelAttribute MedicionesDto medicionesForm,
 			final RedirectAttributes redirectAttributes) {
-		inspeccion.setEstadoInspeccion(
-				calcularEstado(observacionesForm.getObservaciones(), medicionesForm.getMediciones()));
 		try {
-			inspeccionService.agregarInspeccion(inspeccion);
+			inspeccionService.agregarInspeccion(inspeccion, observacionesForm.getObservaciones(),
+					medicionesForm.getMediciones());
 			redirectAttributes.addFlashAttribute("success", "La inspección ha sido agregada. El estado de la misma fue "
 					+ inspeccion.getEstadoInspeccion().toUpperCase() + ".");
 		} catch (Exception e) {
@@ -133,28 +131,4 @@ public class InspeccionController {
 		return "/informes/inspeccion/recent";
 	}
 
-	private String calcularEstado(List<Control> observaciones, List<Control> mediciones) {
-		// ver si tiene algún "Rechazado"
-		for (Control observacion : observaciones) {
-			if (observacion.getEstado().equals("Rechazado"))
-				return "Rechazado";
-		}
-		for (Control medicion : mediciones) {
-			if (medicion.getEstado().equals("Rechazado"))
-				return "Rechazado";
-		}
-
-		// ver si tiene algún "Condicional"
-		for (Control observacion : observaciones) {
-			if (observacion.getEstado().equals("Condicional"))
-				return "Condicional";
-		}
-		for (Control medicion : mediciones) {
-			if (medicion.getEstado().equals("Condicional"))
-				return "Condicional";
-		}
-
-		// si no, son todos "Apto"
-		return "Apto";
-	}
 }

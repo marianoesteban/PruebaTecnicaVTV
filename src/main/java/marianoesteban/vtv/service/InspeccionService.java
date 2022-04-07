@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.model.Control;
 import marianoesteban.vtv.model.Inspeccion;
 
 @Service
@@ -12,6 +13,7 @@ public interface InspeccionService {
 
 	List<Inspeccion> listarInspecciones();
 	Inspeccion agregarInspeccion(Inspeccion inspeccion);
+	Inspeccion agregarInspeccion(Inspeccion inspeccion, List<Control> observaciones, List<Control> mediciones);
 	Inspeccion getInspeccion(long idInspeccion);
 	Inspeccion editarInspeccion(long idInspeccion, Inspeccion inspeccion);
 	void eliminarInspeccion(long idInspeccion);

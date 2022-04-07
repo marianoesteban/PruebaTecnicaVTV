@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.model.Control;
 import marianoesteban.vtv.model.Inspeccion;
 import marianoesteban.vtv.model.Inspector;
 import marianoesteban.vtv.model.Propietario;
@@ -25,6 +26,12 @@ public class InspeccionServiceImpl implements InspeccionService {
 	@Override
 	public Inspeccion agregarInspeccion(Inspeccion inspeccion) {
 		return inspeccionRepository.save(inspeccion);
+	}
+
+	@Override
+	public Inspeccion agregarInspeccion(Inspeccion inspeccion, List<Control> observaciones, List<Control> mediciones) {
+		inspeccion.setEstadoInspeccion(calcularEstado(observaciones, mediciones));
+		return agregarInspeccion(inspeccion);
 	}
 
 	@Override
@@ -67,6 +74,31 @@ public class InspeccionServiceImpl implements InspeccionService {
 		Propietario propietario = new Propietario();
 		propietario.setId(idPropietario);
 		return inspeccionRepository.findByPropietario(propietario);
+	}
+
+	private String calcularEstado(List<Control> observaciones, List<Control> mediciones) {
+		// ver si tiene algún "Rechazado"
+		for (Control observacion : observaciones) {
+			if (observacion.getEstado().equals("Rechazado"))
+				return "Rechazado";
+		}
+		for (Control medicion : mediciones) {
+			if (medicion.getEstado().equals("Rechazado"))
+				return "Rechazado";
+		}
+
+		// ver si tiene algún "Condicional"
+		for (Control observacion : observaciones) {
+			if (observacion.getEstado().equals("Condicional"))
+				return "Condicional";
+		}
+		for (Control medicion : mediciones) {
+			if (medicion.getEstado().equals("Condicional"))
+				return "Condicional";
+		}
+
+		// si no, son todos "Apto"
+		return "Apto";
 	}
 
 }
