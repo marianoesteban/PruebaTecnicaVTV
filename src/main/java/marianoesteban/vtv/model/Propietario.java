@@ -9,11 +9,11 @@ public class Propietario extends Persona {
 		super();
 	}
 	
-	public Propietario(Long id, Long dni, String nombres, String apellido) {
+	public Propietario(Long id, String dni, String nombres, String apellido) {
 		super(id, dni, nombres, apellido);
 	}
 	
-	public Propietario(Long dni, String nombres, String apellido) {
+	public Propietario(String dni, String nombres, String apellido) {
 		super(dni, nombres, apellido);
 	}
 

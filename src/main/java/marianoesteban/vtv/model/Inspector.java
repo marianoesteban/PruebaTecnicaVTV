@@ -9,7 +9,7 @@ public class Inspector extends Persona {
 		super();
 	}
 	
-	public Inspector(Long dni, String nombres, String apellido) {
+	public Inspector(String dni, String nombres, String apellido) {
 		super(dni, nombres, apellido);
 	}
 

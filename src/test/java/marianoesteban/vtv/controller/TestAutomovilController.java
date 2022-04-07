@@ -33,8 +33,8 @@ public class TestAutomovilController {
 	@MockBean
 	private PropietarioService propietarioService;
 	
-	private static final Propietario PROPIETARIO_1 = new Propietario(1L, 12345678L, "Ricardo", "Lopez");
-	private static final Propietario PROPIETARIO_2 = new Propietario(2L, 23456789L, "Teresa", "Doaz");
+	private static final Propietario PROPIETARIO_1 = new Propietario(1L, "12345678", "Ricardo", "Lopez");
+	private static final Propietario PROPIETARIO_2 = new Propietario(2L, "23456789", "Teresa", "Doaz");
 	
 	private static final Automovil AUTOMOVIL_1 = new Automovil(1L, "ABC123", "Volkswagen", "Gol", PROPIETARIO_1);
 	private static final Automovil AUTOMOVIL_2 = new Automovil(2L, "DEF456", "Peugeot", "207", PROPIETARIO_1);

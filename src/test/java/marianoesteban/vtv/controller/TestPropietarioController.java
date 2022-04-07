@@ -32,9 +32,9 @@ public class TestPropietarioController {
 	@MockBean
 	private InspeccionService inspeccionService;
 	
-	private static final Propietario PROPIETARIO_1 = new Propietario(1L, 12345678L, "Ricardo", "Lopez");
-	private static final Propietario PROPIETARIO_2 = new Propietario(2L, 23456789L, "Teresa", "Doaz");
-	private static final Propietario PROPIETARIO_3 = new Propietario(3L, 23456789L, "Juan", "Perez");
+	private static final Propietario PROPIETARIO_1 = new Propietario(1L, "12345678", "Ricardo", "Lopez");
+	private static final Propietario PROPIETARIO_2 = new Propietario(2L, "23456789", "Teresa", "Doaz");
+	private static final Propietario PROPIETARIO_3 = new Propietario(3L, "23456789", "Juan", "Perez");
 	
 	@Test
 	public void listarPropietarios() throws Exception {

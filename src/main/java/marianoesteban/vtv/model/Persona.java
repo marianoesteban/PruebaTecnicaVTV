@@ -17,7 +17,7 @@ public class Persona {
 	@Column(name="id_persona")
 	private Long id;
 	
-	private Long dni;
+	private String dni;
 	
 	private String nombres;
 	
@@ -26,14 +26,14 @@ public class Persona {
 	public Persona() {
 	}
 
-	public Persona(Long id, Long dni, String nombres, String apellido) {
+	public Persona(Long id, String dni, String nombres, String apellido) {
 		this.id = id;
 		this.dni = dni;
 		this.nombres = nombres;
 		this.apellido = apellido;
 	}
 
-	public Persona(Long dni, String nombres, String apellido) {
+	public Persona(String dni, String nombres, String apellido) {
 		this.dni = dni;
 		this.nombres = nombres;
 		this.apellido = apellido;
@@ -47,11 +47,11 @@ public class Persona {
 		this.id = id;
 	}
 
-	public Long getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Long dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 

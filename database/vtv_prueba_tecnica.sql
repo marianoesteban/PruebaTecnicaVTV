@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS `persona`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `persona` (
   `id_persona` int NOT NULL AUTO_INCREMENT,
-  `dni` int DEFAULT NULL,
+  `dni` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nombres` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `apellido` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_persona`)
@@ -125,7 +125,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,12345678,'Carlos','Ramos'),(2,23456789,'Juana','Herrera'),(3,34567890,'Juan José','García'),(4,45678901,'Ana María','Flores'),(5,56789012,'Ramón','Valdez'),(6,3180648,'Paula','Ruiz'),(7,35908901,'Omar','Fernández'),(8,3164001,'Marcela','González'),(9,31501650,'Alan','Pinto'),(10,5501611,'Ana','Varela'),(11,67890123,'Pedro','González'),(12,78901234,'Emilia','Gómez'),(13,89012345,'Omar','Morales'),(14,90123456,'Inés','Pérez'),(15,18163900,'Pablo','Arias'),(16,32470110,'Fernando','Herrera'),(17,40165101,'Hernán','Franco'),(18,9181652,'Ramiro','Zelaya'),(19,48256181,'Florencia','Arias'),(20,20771203,'María','Estévez'),(24,9532001,'Elisa','Pérez'),(25,7203101,'Jorge','Díaz');
+INSERT INTO `persona` VALUES (1,'12345678','Carlos','Ramos'),(2,'23456789','Juana','Herrera'),(3,'34567890','Juan José','García'),(4,'45678901','Ana María','Flores'),(5,'56789012','Ramón','Valdez'),(6,'3180648','Paula','Ruiz'),(7,'35908901','Omar','Fernández'),(8,'3164001','Marcela','González'),(9,'31501650','Alan','Pinto'),(10,'5501611','Ana','Varela'),(11,'67890123','Pedro','González'),(12,'78901234','Emilia','Gómez'),(13,'89012345','Omar','Morales'),(14,'90123456','Inés','Pérez'),(15,'18163900','Pablo','Arias'),(16,'32470110','Fernando','Herrera'),(17,'40165101','Hernán','Franco'),(18,'9181652','Ramiro','Zelaya'),(19,'48256181','Florencia','Arias'),(20,'20771203','María','Estévez'),(24,'9532001','Elisa','Pérez'),(25,'7203101','Jorge','Díaz');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-20 13:04:12
+-- Dump completed on 2022-04-07 11:30:32
