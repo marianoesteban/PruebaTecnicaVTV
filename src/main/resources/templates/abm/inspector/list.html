@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th scope="col">DNI</th>
+                    <th scope="col">Legajo</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Editar</th>
@@ -25,6 +26,7 @@
             <tbody>
                 <tr th:each="inspector : ${inspectores}">
                     <th class="align-middle" scope="row" th:text="${inspector.dni}" />
+                    <td class="align-middle" th:text="${inspector.nroLegajo}" />
                     <td class="align-middle" th:text="${inspector.nombres}" />
                     <td class="align-middle" th:text="${inspector.apellido}" />
                     <td><a class="btn btn-sm btn-primary" href="edit.html" th:href=@{/abm/inspectores/editar/{id}(id=${inspector.id})}>Editar</a></td>

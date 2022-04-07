@@ -11,7 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">DNI</th>
+                    <th scope="col">Legajo</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Ver inspecciones recientes</th>
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr th:each="inspector : ${inspectores}">
-                    <th class="align-middle" scope="row" th:text="${inspector.dni}" />
+                    <th class="align-middle" scope="row" th:text="${inspector.nroLegajo}" />
                     <td class="align-middle" th:text="${inspector.nombres}" />
                     <td class="align-middle" th:text="${inspector.apellido}" />
                     <td><a class="btn btn-sm btn-info" href="recent-inspecciones.html" th:href=@{/informes/inspectores/ultimos-tres-dias/{id}(id=${inspector.id})}>Inspecciones en los últimos tres días</a></td>

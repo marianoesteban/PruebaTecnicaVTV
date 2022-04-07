@@ -21,6 +21,7 @@ public class InspectorServiceImpl implements InspectorService {
 
 	@Override
 	public Inspector agregarInspector(Inspector inspector) {
+		inspector.setNroLegajo(proximoNroLegajo());
 		return inspectorRepository.save(inspector);
 	}
 
@@ -38,6 +39,19 @@ public class InspectorServiceImpl implements InspectorService {
 	@Override
 	public void eliminarInspector(long idInspector) {
 		inspectorRepository.deleteById(idInspector);
+	}
+
+	private String proximoNroLegajo() {
+		String lastNroLegajo = inspectorRepository.findMaxNroLegajo();
+		char proxLetra = lastNroLegajo.charAt(0);
+		int proxNumero = Integer.parseInt(lastNroLegajo.substring(1)) + 1;
+		if (proxNumero == 1000) {
+			proxNumero = 0;
+			if (proxLetra == 'Z')
+				throw new RuntimeException("No quedan más números de legajo disponibles");
+			proxLetra++;
+		}
+		return String.format("%c%03d", proxLetra, proxNumero);
 	}
 
 }

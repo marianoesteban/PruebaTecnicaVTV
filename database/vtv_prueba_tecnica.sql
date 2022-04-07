@@ -26,9 +26,9 @@ DROP TABLE IF EXISTS `automovil`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `automovil` (
   `id_automovil` int NOT NULL AUTO_INCREMENT,
-  `dominio` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `marca` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `modelo` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dominio` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marca` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modelo` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_propietario` int DEFAULT NULL,
   PRIMARY KEY (`id_automovil`),
   KEY `fk_automovil_propietario1_idx` (`id_propietario`),
@@ -57,7 +57,7 @@ CREATE TABLE `inspeccion` (
   `id_inspeccion` int NOT NULL AUTO_INCREMENT,
   `nro_inspeccion` int DEFAULT NULL,
   `fecha_inspeccion` date DEFAULT NULL,
-  `estado_inspeccion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado_inspeccion` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `esta_exento` tinyint DEFAULT NULL,
   `id_automovil` int NOT NULL,
   `id_inspector` int NOT NULL,
@@ -88,6 +88,7 @@ DROP TABLE IF EXISTS `inspector`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inspector` (
   `id_persona` int NOT NULL,
+  `nro_legajo` char(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_persona`),
   CONSTRAINT `fk_inspector_persona1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`id_persona`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -99,7 +100,7 @@ CREATE TABLE `inspector` (
 
 LOCK TABLES `inspector` WRITE;
 /*!40000 ALTER TABLE `inspector` DISABLE KEYS */;
-INSERT INTO `inspector` VALUES (6),(7),(8),(9),(10),(16),(17),(18),(19),(20);
+INSERT INTO `inspector` VALUES (6,'A000'),(7,'A001'),(8,'A002'),(9,'A003'),(10,'B123'),(16,'B898'),(17,'C004'),(18,'C500'),(19,'C997'),(20,'C998');
 /*!40000 ALTER TABLE `inspector` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,9 +113,9 @@ DROP TABLE IF EXISTS `persona`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `persona` (
   `id_persona` int NOT NULL AUTO_INCREMENT,
-  `dni` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nombres` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `apellido` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dni` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombres` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apellido` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_persona`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -162,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-07 11:30:32
+-- Dump completed on 2022-04-07 14:34:31
