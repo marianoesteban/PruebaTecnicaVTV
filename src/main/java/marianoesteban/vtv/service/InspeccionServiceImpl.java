@@ -1,6 +1,8 @@
 package marianoesteban.vtv.service;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +69,15 @@ public class InspeccionServiceImpl implements InspeccionService {
 				new java.sql.Date(fechaInicio.getTime()), 
 				new java.sql.Date(new Date().getTime())
 		);
+	}
+
+	@Override
+	public List<Inspeccion> getInspeccionesUltimaSemana() {
+		// calcular la fecha de hace 6 días (inicio de última semana)
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DAY_OF_MONTH, -6);
+		Date fecha = cal.getTime();
+		return getInspeccionesRecientes(fecha);
 	}
 
 	@Override

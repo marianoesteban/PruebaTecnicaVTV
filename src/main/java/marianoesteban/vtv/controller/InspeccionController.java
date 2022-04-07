@@ -1,8 +1,5 @@
 package marianoesteban.vtv.controller;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,11 +120,7 @@ public class InspeccionController {
 
 	@GetMapping("/informes/inspecciones/ultima-semana")
 	public String getInspeccionesUltimaSemana(Model model) {
-		// calcular la fecha de hace 6 días (inicio de última semana)
-		Calendar cal = new GregorianCalendar();
-		cal.add(Calendar.DAY_OF_MONTH, -6);
-		Date fecha = cal.getTime();
-		model.addAttribute("inspecciones", inspeccionService.getInspeccionesRecientes(fecha));
+		model.addAttribute("inspecciones", inspeccionService.getInspeccionesUltimaSemana());
 		return "/informes/inspeccion/recent";
 	}
 

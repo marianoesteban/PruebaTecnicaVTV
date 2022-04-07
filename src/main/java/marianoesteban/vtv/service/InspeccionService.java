@@ -19,5 +19,6 @@ public interface InspeccionService {
 	void eliminarInspeccion(long idInspeccion);
 	List<Inspeccion> getInspeccionesRecientes(Date fechaInicio);
 	List<Inspeccion> getInspeccionesRecientes(Date fechaInicio, long idInspector);
+	List<Inspeccion> getInspeccionesUltimaSemana();
 	List<Inspeccion> getInspeccionesPorPropietario(long idPropietario);
 }
