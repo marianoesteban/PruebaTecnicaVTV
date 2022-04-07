@@ -1,8 +1,5 @@
 package marianoesteban.vtv.controller;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,12 +92,8 @@ public class InspectorController {
 
 	@GetMapping("/informes/inspectores/ultimos-tres-dias/{idInspector}")
 	public String getInspeccionesUltimosTresDias(@PathVariable("idInspector") long idInspector, Model model) {
-		// calcular la fecha de hace 2 días (inicio de últimos tres días)
-		Calendar cal = new GregorianCalendar();
-		cal.add(Calendar.DAY_OF_MONTH, -2);
-		Date fecha = cal.getTime();
 		model.addAttribute("inspector", inspectorService.getInspector(idInspector));
-		model.addAttribute("inspecciones", inspeccionService.getInspeccionesRecientes(fecha, idInspector));
+		model.addAttribute("inspecciones", inspeccionService.getInspeccionesUltimosTresDias(idInspector));
 		return "informes/inspector/recent-inspecciones";
 	}
 }

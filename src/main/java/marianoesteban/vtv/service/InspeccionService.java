@@ -20,5 +20,6 @@ public interface InspeccionService {
 	List<Inspeccion> getInspeccionesRecientes(Date fechaInicio);
 	List<Inspeccion> getInspeccionesRecientes(Date fechaInicio, long idInspector);
 	List<Inspeccion> getInspeccionesUltimaSemana();
+	List<Inspeccion> getInspeccionesUltimosTresDias(long idInspector);
 	List<Inspeccion> getInspeccionesPorPropietario(long idPropietario);
 }

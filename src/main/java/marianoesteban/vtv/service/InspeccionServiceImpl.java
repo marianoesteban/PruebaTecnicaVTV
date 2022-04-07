@@ -81,6 +81,15 @@ public class InspeccionServiceImpl implements InspeccionService {
 	}
 
 	@Override
+	public List<Inspeccion> getInspeccionesUltimosTresDias(long idInspector) {
+		// calcular la fecha de hace 2 días (inicio de últimos tres días)
+		Calendar cal = new GregorianCalendar();
+		cal.add(Calendar.DAY_OF_MONTH, -2);
+		Date fecha = cal.getTime();
+		return getInspeccionesRecientes(fecha, idInspector);
+	}
+
+	@Override
 	public List<Inspeccion> getInspeccionesPorPropietario(long idPropietario) {
 		Propietario propietario = new Propietario();
 		propietario.setId(idPropietario);
