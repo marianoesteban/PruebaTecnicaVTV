@@ -24,4 +24,9 @@ public class ModeloServiceImpl implements ModeloService {
 		return modeloRepository.save(modelo);
 	}
 
+	@Override
+	public void eliminarModelo(long idModelo) {
+		modeloRepository.deleteById(idModelo);
+	}
+
 }

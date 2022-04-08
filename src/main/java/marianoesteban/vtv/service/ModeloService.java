@@ -11,4 +11,5 @@ public interface ModeloService {
 
 	List<Modelo> listarModelos();
 	Modelo agregarModelo(Modelo modelo);
+	void eliminarModelo(long idModelo);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,6 +47,17 @@ public class ModeloController {
 			redirectAttributes.addFlashAttribute("success", "El modelo se agregó exitosamente.");
 		} catch (Exception exception) {
 			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: el modelo no se ha podido agregar");
+		}
+		return "redirect:/abm/modelos";
+	}
+
+	@GetMapping("/abm/modelos/eliminar/{idModelo}")
+	public String deleteModelo(@PathVariable("idModelo") long idModelo, final RedirectAttributes redirectAttributes) {
+		try {
+			modeloService.eliminarModelo(idModelo);
+			redirectAttributes.addFlashAttribute("success", "El modelo ha sido eliminado exitosamente.");
+		} catch (Exception exception) {
+			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: no se ha podido eliminar el modelo.");
 		}
 		return "redirect:/abm/modelos";
 	}
