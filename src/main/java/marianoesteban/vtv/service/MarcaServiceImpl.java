@@ -24,4 +24,9 @@ public class MarcaServiceImpl implements MarcaService {
 		return marcaRepository.save(marca);
 	}
 
+	@Override
+	public void eliminarMarca(long idMarca) {
+		marcaRepository.deleteById(idMarca);
+	}
+
 }

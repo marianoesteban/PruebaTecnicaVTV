@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,7 +19,7 @@ public class MarcaController {
 
 	@Autowired
 	private MarcaService marcaService;
-	
+
 	@GetMapping("/abm/marcas")
 	public String listMarcas(Model model) {
 		List<Marca> marcas = marcaService.listarMarcas();
@@ -36,9 +37,20 @@ public class MarcaController {
 	public String addMarca(@ModelAttribute Marca marca, Model model, final RedirectAttributes redirectAttributes) {
 		try {
 			marcaService.agregarMarca(marca);
-			redirectAttributes.addFlashAttribute("success", "La marca se agregó exitosamente");
+			redirectAttributes.addFlashAttribute("success", "La marca se agregó exitosamente.");
 		} catch (Exception exception) {
-			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: la marca no se ha podido agregar");
+			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: la marca no se ha podido agregar.");
+		}
+		return "redirect:/abm/marcas";
+	}
+
+	@GetMapping("/abm/marcas/eliminar/{idMarca}")
+	public String deleteMarca(@PathVariable("idMarca") long idMarca, final RedirectAttributes redirectAttributes) {
+		try {
+			marcaService.eliminarMarca(idMarca);
+			redirectAttributes.addFlashAttribute("success", "La marca se ha eliminado exitosamente.");
+		} catch (Exception exception) {
+			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: la marca no se ha podido eliminar.");
 		}
 		return "redirect:/abm/marcas";
 	}

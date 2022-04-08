@@ -11,4 +11,5 @@ public interface MarcaService {
 
 	List<Marca> listarMarcas();
 	Marca agregarMarca(Marca marca);
+	void eliminarMarca(long idMarca);
 }
