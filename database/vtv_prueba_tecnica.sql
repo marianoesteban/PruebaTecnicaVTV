@@ -129,6 +129,33 @@ INSERT INTO `marca` VALUES (1,'Ford'),(2,'Fiat'),(3,'Volkswagen'),(4,'Chevrolet'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `modelo`
+--
+
+DROP TABLE IF EXISTS `modelo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `modelo` (
+  `id_modelo` int NOT NULL AUTO_INCREMENT,
+  `id_marca` int NOT NULL,
+  `nombre` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_modelo`),
+  KEY `fk_modelo_marca1_idx` (`id_marca`),
+  CONSTRAINT `fk_modelo_marca1` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modelo`
+--
+
+LOCK TABLES `modelo` WRITE;
+/*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
+INSERT INTO `modelo` VALUES (1,2,'Cronos'),(2,3,'Gol'),(3,4,'Onix'),(4,1,'Ka'),(5,2,'Palio');
+/*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `persona`
 --
 
@@ -187,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 10:00:30
+-- Dump completed on 2022-04-08 10:51:03
