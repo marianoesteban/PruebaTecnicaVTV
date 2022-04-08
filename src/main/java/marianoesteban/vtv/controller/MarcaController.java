@@ -2,9 +2,12 @@ package marianoesteban.vtv.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +37,10 @@ public class MarcaController {
 	}
 
 	@PostMapping("/abm/marcas/agregar")
-	public String addMarca(@ModelAttribute Marca marca, Model model, final RedirectAttributes redirectAttributes) {
+	public String addMarca(@Valid @ModelAttribute Marca marca, BindingResult bindingResult, Model model,
+			final RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors())
+			return "abm/marca/add";
 		try {
 			marcaService.agregarMarca(marca);
 			redirectAttributes.addFlashAttribute("success", "La marca se agregó exitosamente.");
