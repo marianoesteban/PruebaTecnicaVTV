@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -17,10 +20,15 @@ public class Persona {
 	@Column(name="id_persona")
 	private Long id;
 	
+	@NotBlank(message="Debe especificar el DNI")
+	@Size(min=7, max=8, message="El DNI debe tener 7 u 8 caracteres")
+	@Pattern(regexp="[0-9]*", message="El DNI sólo debe contener números")
 	private String dni;
 	
+	@NotBlank(message="Debe especificar el nombre")
 	private String nombres;
 	
+	@NotBlank(message="Debe especificar el apellido")
 	private String apellido;
 	
 	public Persona() {

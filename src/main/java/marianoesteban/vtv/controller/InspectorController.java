@@ -38,7 +38,7 @@ public class InspectorController {
 	}
 
 	@PostMapping("/abm/inspectores/agregar")
-	public String addAutomovil(@ModelAttribute Inspector inspector, Model model,
+	public String addInspector(@ModelAttribute Inspector inspector, Model model,
 			final RedirectAttributes redirectAttributes) {
 		try {
 			inspectorService.agregarInspector(inspector);

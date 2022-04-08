@@ -2,9 +2,12 @@ package marianoesteban.vtv.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +41,10 @@ public class PropietarioController {
 	}
 
 	@PostMapping("/abm/propietarios/agregar")
-	public String addPropietario(@ModelAttribute Propietario propietario, Model model,
-			final RedirectAttributes redirectAttributes) {
+	public String addPropietario(@Valid @ModelAttribute Propietario propietario, BindingResult bindingResult,
+			Model model, final RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors())
+			return "abm/propietario/add";
 		try {
 			propietarioService.agregarPropietario(propietario);
 			redirectAttributes.addFlashAttribute("success", "El propietario se agregó exitosamente.");
@@ -59,7 +64,10 @@ public class PropietarioController {
 
 	@PostMapping("/abm/propietarios/editar/{idPropietario}")
 	public String editPropietario(@PathVariable("idPropietario") long idPropietario,
-			@ModelAttribute Propietario propietario, Model model, final RedirectAttributes redirectAttributes) {
+			@Valid @ModelAttribute Propietario propietario, BindingResult bindingResult, Model model,
+			final RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors())
+			return "abm/propietario/edit";
 		try {
 			propietarioService.editarPropietario(idPropietario, propietario);
 			redirectAttributes.addFlashAttribute("success", "Los datos del propietario se modificaron exitosamente.");
