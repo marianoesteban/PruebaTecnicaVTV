@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Agregar marca')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+    
+    <div class="container">
+        <h2>Agregar marca</h2>
+        <form th:object="${marca}" method="POST">
+            <div class="form-group">
+                <label for="inputMarca">Marca</label>
+                <input type="text" class="form-control" id="inputDominio" th:field="*{nombre}" th:required="required" />
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Agregar</button>
+        </form>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+</body>
+</html>

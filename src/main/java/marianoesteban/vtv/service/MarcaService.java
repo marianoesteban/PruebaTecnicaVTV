@@ -10,4 +10,5 @@ import marianoesteban.vtv.model.Marca;
 public interface MarcaService {
 
 	List<Marca> listarMarcas();
+	Marca agregarMarca(Marca marca);
 }
