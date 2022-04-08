@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.exception.DniExistsException;
 import marianoesteban.vtv.model.Propietario;
 import marianoesteban.vtv.repository.PropietarioRepository;
 
 @Service
 public class PropietarioServiceImpl implements PropietarioService {
-	
+
 	@Autowired
 	private PropietarioRepository propietarioRepository;
 
@@ -21,6 +22,7 @@ public class PropietarioServiceImpl implements PropietarioService {
 
 	@Override
 	public Propietario agregarPropietario(Propietario propietario) {
+		chequearDniUnico(propietario.getDni());
 		return propietarioRepository.save(propietario);
 	}
 
@@ -31,6 +33,9 @@ public class PropietarioServiceImpl implements PropietarioService {
 
 	@Override
 	public Propietario editarPropietario(long idPropietario, Propietario propietario) {
+		// si el DNI cambió
+		if (!propietarioRepository.findDniById(idPropietario).equals(propietario.getDni()))
+			chequearDniUnico(propietario.getDni());
 		propietario.setId(idPropietario);
 		return propietarioRepository.save(propietario);
 	}
@@ -38,6 +43,11 @@ public class PropietarioServiceImpl implements PropietarioService {
 	@Override
 	public void eliminarPropietario(long idPropietario) {
 		propietarioRepository.deleteById(idPropietario);
+	}
+
+	private void chequearDniUnico(String dni) {
+		if (propietarioRepository.existsByDni(dni))
+			throw new DniExistsException("Ya existe un propietario con ese DNI");
 	}
 
 }

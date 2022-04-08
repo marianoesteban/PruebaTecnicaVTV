@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import marianoesteban.vtv.exception.DniExistsException;
 import marianoesteban.vtv.model.Propietario;
 import marianoesteban.vtv.service.InspeccionService;
 import marianoesteban.vtv.service.PropietarioService;
@@ -48,6 +49,9 @@ public class PropietarioController {
 		try {
 			propietarioService.agregarPropietario(propietario);
 			redirectAttributes.addFlashAttribute("success", "El propietario se agregó exitosamente.");
+		} catch (DniExistsException dniExistsException) {
+			redirectAttributes.addFlashAttribute("error",
+					"No se ha podido agregar: ya existe un propietario con ese DNI.");
 		} catch (Exception exception) {
 			redirectAttributes.addFlashAttribute("error",
 					"Ha ocurrido un error: el propietario no se ha podido agregar.");
@@ -71,6 +75,9 @@ public class PropietarioController {
 		try {
 			propietarioService.editarPropietario(idPropietario, propietario);
 			redirectAttributes.addFlashAttribute("success", "Los datos del propietario se modificaron exitosamente.");
+		} catch (DniExistsException dniExistsException) {
+			redirectAttributes.addFlashAttribute("error",
+					"No se ha podido modificar: ya existe un propietario con ese DNI.");
 		} catch (Exception exception) {
 			redirectAttributes.addFlashAttribute("error",
 					"Ha ocurrido un error: los datos del propietario no se han podido modificar.");
