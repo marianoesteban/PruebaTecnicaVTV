@@ -9,4 +9,5 @@ import marianoesteban.vtv.model.Marca;
 public interface MarcaRepository extends CrudRepository<Marca, Long> {
 
 	List<Marca> findAll();
+	boolean existsByNombre(String nombre);
 }
