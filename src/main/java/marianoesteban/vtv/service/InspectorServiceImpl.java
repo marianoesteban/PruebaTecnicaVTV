@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.exception.DniExistsException;
 import marianoesteban.vtv.model.Inspector;
 import marianoesteban.vtv.repository.InspectorRepository;
 
@@ -13,7 +14,7 @@ public class InspectorServiceImpl implements InspectorService {
 
 	@Autowired
 	InspectorRepository inspectorRepository;
-	
+
 	@Override
 	public List<Inspector> listarInspectores() {
 		return inspectorRepository.findAll();
@@ -21,6 +22,7 @@ public class InspectorServiceImpl implements InspectorService {
 
 	@Override
 	public Inspector agregarInspector(Inspector inspector) {
+		chequearDniUnico(inspector.getDni());
 		inspector.setNroLegajo(proximoNroLegajo());
 		return inspectorRepository.save(inspector);
 	}
@@ -32,6 +34,9 @@ public class InspectorServiceImpl implements InspectorService {
 
 	@Override
 	public Inspector editarInspector(long idInspector, Inspector inspector) {
+		// si el DNI cambió, chequear que no esté repetido
+		if (!inspectorRepository.findDniById(idInspector).equals(inspector.getDni()))
+			chequearDniUnico(inspector.getDni());
 		inspector.setId(idInspector);
 		return inspectorRepository.save(inspector);
 	}
@@ -52,6 +57,11 @@ public class InspectorServiceImpl implements InspectorService {
 			proxLetra++;
 		}
 		return String.format("%c%03d", proxLetra, proxNumero);
+	}
+
+	private void chequearDniUnico(String dni) {
+		if (inspectorRepository.existsByDni(dni))
+			throw new DniExistsException("Ya existe un inspector con ese DNI");
 	}
 
 }

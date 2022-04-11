@@ -2,15 +2,19 @@ package marianoesteban.vtv.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import marianoesteban.vtv.exception.DniExistsException;
 import marianoesteban.vtv.model.Inspector;
 import marianoesteban.vtv.service.InspeccionService;
 import marianoesteban.vtv.service.InspectorService;
@@ -38,11 +42,16 @@ public class InspectorController {
 	}
 
 	@PostMapping("/abm/inspectores/agregar")
-	public String addInspector(@ModelAttribute Inspector inspector, Model model,
+	public String addInspector(@Valid @ModelAttribute Inspector inspector, BindingResult bindingResult, Model model,
 			final RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors())
+			return "abm/inspector/add";
 		try {
 			inspectorService.agregarInspector(inspector);
 			redirectAttributes.addFlashAttribute("success", "El inspector se agregó exitosamente.");
+		} catch (DniExistsException dniExistsException) {
+			redirectAttributes.addFlashAttribute("error",
+					"No se ha podido agregar: ya existe un inspector con ese DNI.");
 		} catch (Exception exception) {
 			redirectAttributes.addFlashAttribute("error",
 					"Ha ocurrido un error: el inspector no se ha podido agregar.");
