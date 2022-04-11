@@ -15,14 +15,16 @@
                     <th scope="col">Dominio</th>
                     <th scope="col">Marca</th>
                     <th scope="col">Modelo</th>
+                    <th scope="col">Versión</th>
                     <th scope="col">Propietario</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="automovil : ${automoviles}">
                     <th class="align-middle" scope="row" th:text="${automovil.dominio}" />
-                    <td class="align-middle" th:text="${automovil.marca}" />
-                    <td class="align-middle" th:text="${automovil.modelo}" />
+                    <td class="align-middle" th:text="${automovil.versionAutomovil.modelo.marca.nombre}" />
+                    <td class="align-middle" th:text="${automovil.versionAutomovil.modelo.nombre}" />
+                    <td class="align-middle" th:text="${automovil.versionAutomovil.nombre}" />
                     <td class="align-middle" th:text="${automovil.propietario.nombres} + ' ' + ${automovil.propietario.apellido}" />
                 </tr>
             </tbody>

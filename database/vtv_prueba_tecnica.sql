@@ -27,12 +27,13 @@ DROP TABLE IF EXISTS `automovil`;
 CREATE TABLE `automovil` (
   `id_automovil` int NOT NULL AUTO_INCREMENT,
   `dominio` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `marca` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `modelo` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_version_automovil` int NOT NULL,
   `id_propietario` int DEFAULT NULL,
   PRIMARY KEY (`id_automovil`),
   KEY `fk_automovil_propietario1_idx` (`id_propietario`),
-  CONSTRAINT `fk_automovil_propietario1` FOREIGN KEY (`id_propietario`) REFERENCES `propietario` (`id_persona`)
+  KEY `fk_automovil_version1_idx` (`id_version_automovil`),
+  CONSTRAINT `fk_automovil_propietario1` FOREIGN KEY (`id_propietario`) REFERENCES `propietario` (`id_persona`),
+  CONSTRAINT `fk_automovil_version1` FOREIGN KEY (`id_version_automovil`) REFERENCES `version` (`id_version`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -42,7 +43,7 @@ CREATE TABLE `automovil` (
 
 LOCK TABLES `automovil` WRITE;
 /*!40000 ALTER TABLE `automovil` DISABLE KEYS */;
-INSERT INTO `automovil` VALUES (1,'ABC123','Toyota','Etios',1),(2,'AB123DE','Renault','Megane',2),(3,'BCD234','Chevrolet','Corsa',3),(4,'BC234DE','Volkswagen','Gol',1),(5,'CDE345','Peugeot','207',15),(6,'CD345EF','Ford','Ka',12),(7,'DEF456','Fiat','Palio',13),(8,'DE456FG','Volkswagen','Suran',12),(9,'EFG567','Toyota','Etios',4),(10,'EF567GH','Ford','Focus',1),(11,'ZXY987','Ford','Fiesta',4),(12,'ZX987YW','Volkswagen','Gol',2),(13,'VMM181','Renault','Clio',5),(15,'DAS459','Ford','Focus',24),(16,'RDM108','Volkswagen','Gol',25),(17,'AP901XW','Peugeot','208',25);
+INSERT INTO `automovil` VALUES (1,'ABC123',1,1),(2,'AB123DE',2,2),(3,'BCD234',3,3),(4,'BC234DE',4,1),(5,'CDE345',5,15),(6,'CD345EF',6,12),(7,'DEF456',7,13),(8,'DE456FG',8,12),(9,'EFG567',9,4),(10,'EF567GH',10,1),(11,'ZXY987',11,4),(12,'ZX987YW',12,2),(13,'VMM181',13,5),(15,'DAS459',14,24),(16,'RDM108',1,25),(17,'AP901XW',2,25);
 /*!40000 ALTER TABLE `automovil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +58,7 @@ CREATE TABLE `inspeccion` (
   `id_inspeccion` int NOT NULL AUTO_INCREMENT,
   `nro_inspeccion` int DEFAULT NULL,
   `fecha_inspeccion` date DEFAULT NULL,
-  `estado_inspeccion` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado_inspeccion` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `esta_exento` tinyint DEFAULT NULL,
   `id_automovil` int NOT NULL,
   `id_inspector` int NOT NULL,
@@ -241,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-11 12:55:33
+-- Dump completed on 2022-04-11 15:41:18

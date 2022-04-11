@@ -21,7 +21,7 @@
             <tbody>
                 <tr th:each="inspeccion : ${inspecciones}">
                     <th scope="row" th:text="${inspeccion.automovil.dominio}" />
-                    <td th:text="${inspeccion.automovil.marca} + ' ' + ${inspeccion.automovil.modelo}" />
+                    <td th:text="${inspeccion.automovil.versionAutomovil.modelo.marca.nombre} + ' ' + ${inspeccion.automovil.versionAutomovil.modelo.nombre} + ' ' + ${inspeccion.automovil.versionAutomovil.nombre}" />
                     <td th:text="${inspeccion.inspector.nombres} + ' ' + ${inspeccion.inspector.apellido}" />
                     <td th:text="${inspeccion.fechaInspeccion}" />
                     <td th:text="${inspeccion.estadoInspeccion}" />

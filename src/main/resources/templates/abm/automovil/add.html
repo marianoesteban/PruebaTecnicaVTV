@@ -14,12 +14,20 @@
                 <input type="text" class="form-control" id="inputDominio" th:field="*{dominio}" th:required="required" />
             </div>
             <div class="form-group">
-                <label for="inputMarca">Marca</label>
-                <input type="text" class="form-control" id="inputMarca" th:field="*{marca}" th:required="required" />
+                <label for="selectMarca">Marca</label>
+                <select class="form-control" id="selectMarca" th:field="*{versionAutomovil.modelo.marca.id}">
+                    <option th:each="marca: ${marcas}"
+                            th:value="${marca.id}"
+                            th:text="${marca.nombre}">Nombre de la marca</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="inputModelo">Modelo</label>
-                <input type="text" class="form-control" id="inputModelo" th:field="*{modelo}" th:required="required" />
+                <label for="selectModelo">Modelo</label>
+                <select class="form-control" id="selectModelo" th:field="*{versionAutomovil.modelo.id}"></select>
+            </div>
+            <div class="form-group">
+                <label for="selectVersion">Versión</label>
+                <select class="form-control" id="selectVersion" th:field="*{versionAutomovil.id}"></select>
             </div>
             <div class="form-group">
                 <label for="selectPropietario">Propietario</label>
@@ -34,5 +42,53 @@
     </div>
     
     <div th:replace="layout :: volver">Volver</div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        /*<![CDATA[*/
+        $(document).ready(function() {
+            $('#selectMarca').on('change', function() {
+                var marcaId = $(this).val();
+                $('#selectModelo').attr('disabled', true);
+                $('#selectVersion').attr('disabled', true);
+                $.ajax({
+                    type: 'GET',
+                    url: "[[@{/json/modelos}]]?idMarca=" + marcaId,
+                    success: function(result) {
+                        var result = JSON.parse(result);
+                        var opciones = '';
+                        for (var i = 0; i < result.length; i++)
+                            opciones += '<option value="' + result[i].id + '">' + result[i].nombre + '</option>'
+                        $('#selectModelo').html(opciones);
+                        $('#selectModelo').attr('disabled', false);
+                        $('#selectModelo').trigger('change');
+                    }
+                });
+            });
+
+            $('#selectModelo').on('change', function() {
+                var modeloId = $(this).val();
+                $('#selectVersion').attr('disabled', true);
+                $.ajax({
+                    type: 'GET',
+                    url: "[[@{/json/versiones}]]?idModelo=" + modeloId,
+                    success: function(result) {
+                        var result = JSON.parse(result);
+                        var opciones = '';
+                        for (var i = 0; i < result.length; i++)
+                            opciones += '<option value="' + result[i].id + '">' + result[i].nombre + '</option>'
+                        $('#selectVersion').html(opciones);
+                        $('#selectVersion').attr('disabled', false);
+                    }
+                });
+            });
+
+            $('#selectModelo').attr('disabled', true);
+            $('#selectVersion').attr('disabled', true);
+
+            $('#selectMarca').trigger('change');
+        });
+        /*]]>*/
+    </script>
 </body>
 </html>

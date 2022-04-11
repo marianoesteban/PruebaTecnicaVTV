@@ -8,7 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
 
 import marianoesteban.vtv.model.Marca;
 import marianoesteban.vtv.model.Version;
@@ -49,5 +53,12 @@ public class VersionController {
 			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: la versión no se ha podido agregar");
 		}
 		return "redirect:/abm/versiones";
+	}
+
+	@ResponseBody
+	@GetMapping("/json/versiones")
+	public String getVersionesByModeloJson(@RequestParam("idModelo") long idModelo) {
+		Gson gson = new Gson();
+		return gson.toJson(versionService.listarVersionesPorModelo(idModelo));
 	}
 }

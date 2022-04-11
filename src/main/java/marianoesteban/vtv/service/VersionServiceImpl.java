@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.model.Modelo;
 import marianoesteban.vtv.model.Version;
 import marianoesteban.vtv.repository.VersionRepository;
 
@@ -17,6 +18,13 @@ public class VersionServiceImpl implements VersionService {
 	@Override
 	public List<Version> listarVersiones() {
 		return versionRepository.findAll();
+	}
+
+	@Override
+	public List<Version> listarVersionesPorModelo(long idModelo) {
+		Modelo modelo = new Modelo();
+		modelo.setId(idModelo);
+		return versionRepository.findByModelo(modelo);
 	}
 
 	@Override

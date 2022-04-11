@@ -18,6 +18,7 @@
                     <th scope="col">Dominio</th>
                     <th scope="col">Marca</th>
                     <th scope="col">Modelo</th>
+                    <th scope="col">Versión</th>
                     <th scope="col">Propietario</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
@@ -26,8 +27,9 @@
             <tbody>
                 <tr th:each="automovil : ${automoviles}">
                     <th class="align-middle" scope="row" th:text="${automovil.dominio}" />
-                    <td class="align-middle" th:text="${automovil.marca}" />
-                    <td class="align-middle" th:text="${automovil.modelo}" />
+                    <td class="align-middle" th:text="${automovil.versionAutomovil.modelo.marca.nombre}" />
+                    <td class="align-middle" th:text="${automovil.versionAutomovil.modelo.nombre}" />
+                    <td class="align-middle" th:text="${automovil.versionAutomovil.nombre}" />
                     <td class="align-middle" th:text="${automovil.propietario.nombres} + ' ' + ${automovil.propietario.apellido}" />
                     <td><a class="btn btn-sm btn-primary" href="edit.html" th:href=@{/abm/automoviles/editar/{id}(id=${automovil.id})}>Editar</a></td>
                     <td><a class="btn btn-sm btn-danger" th:href="@{/abm/automoviles/eliminar/{id}(id=${automovil.id})}" onclick="return confirm('¿Está seguro que quiere eliminar el automóvil?')">Eliminar</a></td>

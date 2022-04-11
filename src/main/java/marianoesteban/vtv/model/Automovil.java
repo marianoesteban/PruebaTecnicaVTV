@@ -12,35 +12,33 @@ import javax.persistence.ManyToOne;
 public class Automovil {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_automovil")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_automovil")
 	private Long id;
-	
+
 	private String dominio;
-	
-	private String marca;
-	
-	private String modelo;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_propietario")
+	@JoinColumn(name = "id_version_automovil")
+	private Version versionAutomovil;
+
+	@ManyToOne
+	@JoinColumn(name = "id_propietario")
 	private Persona propietario;
-	
+
 	public Automovil() {
 	}
 
-	public Automovil(Long id, String dominio, String marca, String modelo, Persona propietario) {
+	public Automovil(Long id, String dominio, Version versionAutomovil, Persona propietario) {
 		this.id = id;
 		this.dominio = dominio;
-		this.marca = marca;
-		this.modelo = modelo;
+		this.versionAutomovil = versionAutomovil;
 		this.propietario = propietario;
 	}
 
-	public Automovil(String dominio, String marca, String modelo, Persona propietario) {
+	public Automovil(String dominio, Version versionAutomovil, Persona propietario) {
 		this.dominio = dominio;
-		this.marca = marca;
-		this.modelo = modelo;
+		this.versionAutomovil = versionAutomovil;
 		this.propietario = propietario;
 	}
 
@@ -60,20 +58,12 @@ public class Automovil {
 		this.dominio = dominio;
 	}
 
-	public String getMarca() {
-		return marca;
+	public Version getVersionAutomovil() {
+		return versionAutomovil;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
+	public void setVersionAutomovil(Version versionAutomovil) {
+		this.versionAutomovil = versionAutomovil;
 	}
 
 	public Persona getPropietario() {
@@ -86,7 +76,7 @@ public class Automovil {
 
 	@Override
 	public String toString() {
-		return "Automovil [dominio=" + dominio + ", marca=" + marca + ", modelo=" + modelo + ", propietario="
-				+ propietario + "]";
+		return "Automovil [id=" + id + ", dominio=" + dominio + ", versionAutomovil=" + versionAutomovil
+				+ ", propietario=" + propietario + "]";
 	}
 }

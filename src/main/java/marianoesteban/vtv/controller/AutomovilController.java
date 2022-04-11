@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import marianoesteban.vtv.model.Automovil;
+import marianoesteban.vtv.model.Marca;
 import marianoesteban.vtv.model.Propietario;
 import marianoesteban.vtv.service.AutomovilService;
+import marianoesteban.vtv.service.MarcaService;
 import marianoesteban.vtv.service.PropietarioService;
 
 @Controller
@@ -21,6 +23,9 @@ public class AutomovilController {
 
 	@Autowired
 	private AutomovilService automovilService;
+
+	@Autowired
+	private MarcaService marcaService;
 
 	@Autowired
 	private PropietarioService propietarioService;
@@ -35,7 +40,9 @@ public class AutomovilController {
 	@GetMapping("/abm/automoviles/agregar")
 	public String addAutomovil(Model model) {
 		List<Propietario> propietarios = propietarioService.listarPropietarios();
+		List<Marca> marcas = marcaService.listarMarcas();
 		model.addAttribute("automovil", new Automovil());
+		model.addAttribute("marcas", marcas);
 		model.addAttribute("propietarios", propietarios);
 		return "abm/automovil/add";
 	}
@@ -57,9 +64,11 @@ public class AutomovilController {
 
 	@GetMapping("/abm/automoviles/editar/{idAutomovil}")
 	public String editAutomovil(@PathVariable("idAutomovil") long idAutomovil, Model model) {
+		List<Marca> marcas = marcaService.listarMarcas();
 		List<Propietario> propietarios = propietarioService.listarPropietarios();
 		Automovil automovil = automovilService.getAutomovil(idAutomovil);
 		model.addAttribute("automovil", automovil);
+		model.addAttribute("marcas", marcas);
 		model.addAttribute("propietarios", propietarios);
 		return "abm/automovil/edit";
 	}
