@@ -204,6 +204,33 @@ LOCK TABLES `propietario` WRITE;
 INSERT INTO `propietario` VALUES (1),(2),(3),(4),(5),(11),(12),(13),(14),(15),(24),(25);
 /*!40000 ALTER TABLE `propietario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `version`
+--
+
+DROP TABLE IF EXISTS `version`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `version` (
+  `id_version` int NOT NULL,
+  `id_modelo` int NOT NULL,
+  `nombre` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_version`),
+  KEY `fk_version_modelo1_idx` (`id_modelo`),
+  CONSTRAINT `fk_version_modelo1` FOREIGN KEY (`id_modelo`) REFERENCES `modelo` (`id_modelo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `version`
+--
+
+LOCK TABLES `version` WRITE;
+/*!40000 ALTER TABLE `version` DISABLE KEYS */;
+INSERT INTO `version` VALUES (1,1,'1.3L'),(2,1,'1.8L'),(3,2,'1.4L'),(4,2,'1.6L'),(5,3,'1.0L'),(6,3,'1.2L'),(7,4,'1.0L'),(8,4,'1.5L'),(9,4,'1.6L'),(10,5,'1.3L'),(11,5,'1.4L'),(12,5,'1.6L'),(13,5,'1.7L'),(14,5,'1.8L');
+/*!40000 ALTER TABLE `version` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -214,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 10:51:03
+-- Dump completed on 2022-04-11 10:11:28
