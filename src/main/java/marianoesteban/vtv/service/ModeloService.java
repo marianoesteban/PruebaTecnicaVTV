@@ -10,6 +10,7 @@ import marianoesteban.vtv.model.Modelo;
 public interface ModeloService {
 
 	List<Modelo> listarModelos();
+	List<Modelo> listarModelosPorMarca(long idMarca);
 	Modelo agregarModelo(Modelo modelo);
 	void eliminarModelo(long idModelo);
 }

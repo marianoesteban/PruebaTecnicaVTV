@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head (titulo='Agregar versión')"> 
+    <title>El título</title>
+</head>
+<body>
+    <div th:replace="layout :: header">Header</div>
+    
+    <div class="container">
+        <h2>Agregar versión</h2>
+        <form th:object="${version}" method="POST">
+            <div class="form-group">
+                <label for="selectMarca">Marca</label>
+                <select class="form-control" id="selectMarca" th:field="*{modelo.marca.id}">
+                    <option th:each="marca: ${marcas}"
+                            th:value="${marca.id}"
+                            th:text="${marca.nombre}">Nombre de la marca</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectModelo">Modelo</label>
+                <select class="form-control" id="selectModelo" th:field="*{modelo.id}"></select>
+            </div>
+            <div class="form-group">
+                <label for="inputVersion">Versión</label>
+                <input type="text" class="form-control" id="inputVersion" th:field="*{nombre}" th:required="required" />
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Agregar</button>
+        </form>
+    </div>
+    
+    <div th:replace="layout :: volver">Volver</div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        $(document).ready(function() {
+            $('#selectMarca').on('change', function() {
+                var marcaId = $(this).val();
+                $('#selectModelo').attr('disabled', true);
+                $.ajax({
+                    type: 'GET',
+                    url: "[[@{/json/modelos}]]?idMarca=" + marcaId,
+                    success: function(result) {
+                        var result = JSON.parse(result);
+                        var opciones = '';
+                        for (var i = 0; i < result.length; i++)
+                            opciones += '<option value="' + result[i].id + '">' + result[i].nombre + '</option>'
+                        $('#selectModelo').html(opciones);
+                        $('#selectModelo').attr('disabled', false);
+                    }
+                });
+            });
+            
+            $('#selectModelo').attr('disabled', true);
+            
+            $('#selectMarca').trigger('change');
+        });
+    </script>
+</body>
+</html>

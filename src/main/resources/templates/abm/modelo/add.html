@@ -11,7 +11,7 @@
         <form th:object="${modelo}" method="POST">
             <div class="form-group">
                 <label for="selectMarca">Marca</label>
-                <select class="form-control" id="selectModelo" th:field="*{marca.id}">
+                <select class="form-control" id="selectMarca" th:field="*{marca.id}">
                     <option th:each="marca: ${marcas}"
                             th:value="${marca.id}"
                             th:text="${marca.nombre}">Nombre de la marca</option>

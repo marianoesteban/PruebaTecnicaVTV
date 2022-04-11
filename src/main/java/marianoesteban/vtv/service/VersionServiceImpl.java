@@ -19,4 +19,9 @@ public class VersionServiceImpl implements VersionService {
 		return versionRepository.findAll();
 	}
 
+	@Override
+	public Version agregarVersion(Version version) {
+		return versionRepository.save(version);
+	}
+
 }

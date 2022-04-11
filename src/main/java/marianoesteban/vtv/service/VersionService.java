@@ -10,4 +10,5 @@ import marianoesteban.vtv.model.Version;
 public interface VersionService {
 
 	List<Version> listarVersiones();
+	Version agregarVersion(Version version);
 }

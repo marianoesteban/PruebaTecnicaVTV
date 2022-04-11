@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.model.Marca;
 import marianoesteban.vtv.model.Modelo;
 import marianoesteban.vtv.repository.ModeloRepository;
 
@@ -17,6 +18,13 @@ public class ModeloServiceImpl implements ModeloService {
 	@Override
 	public List<Modelo> listarModelos() {
 		return modeloRepository.findAll();
+	}
+
+	@Override
+	public List<Modelo> listarModelosPorMarca(long idMarca) {
+		Marca marca = new Marca();
+		marca.setId(idMarca);
+		return modeloRepository.findByMarca(marca);
 	}
 
 	@Override
