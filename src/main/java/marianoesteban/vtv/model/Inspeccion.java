@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Inspeccion {
@@ -19,6 +20,7 @@ public class Inspeccion {
 	@Column(name="id_inspeccion")
 	private Long id;
 	
+	@NotNull(message="Debe especificar el número de inspección")
 	private Long nroInspeccion;
 	
 	private Date fechaInspeccion;

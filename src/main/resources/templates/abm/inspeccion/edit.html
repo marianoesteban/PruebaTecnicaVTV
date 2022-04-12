@@ -11,7 +11,8 @@
         <form th:object="${inspeccion}" method="POST">
             <div class="form-group">
                 <label for="inputNroInspeccion">Número de inspección</label>
-                <input type="number" class="form-control" id="inputNroInspeccion" th:field="*{nroInspeccion}" required />
+                <input type="number" class="form-control" th:classappend="${#fields.hasErrors('nroInspeccion') ? 'is-invalid' : ''}" id="inputNroInspeccion" th:field="*{nroInspeccion}" required />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('nroInspeccion')}" th:errors="*{nroInspeccion}" />
             </div>
             <div class="form-group">
                 <label for="inputFecha">Fecha</label>
