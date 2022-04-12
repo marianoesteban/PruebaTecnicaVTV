@@ -32,4 +32,9 @@ public class VersionServiceImpl implements VersionService {
 		return versionRepository.save(version);
 	}
 
+	@Override
+	public void eliminarVersion(long idVersion) {
+		versionRepository.deleteById(idVersion);
+	}
+
 }

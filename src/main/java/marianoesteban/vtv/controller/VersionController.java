@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,6 +52,18 @@ public class VersionController {
 			redirectAttributes.addFlashAttribute("success", "La versión se agregó exitosamente.");
 		} catch (Exception exception) {
 			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: la versión no se ha podido agregar");
+		}
+		return "redirect:/abm/versiones";
+	}
+
+	@GetMapping("/abm/versiones/eliminar/{idVersion}")
+	public String deleteVersion(@PathVariable("idVersion") long idVersion,
+			final RedirectAttributes redirectAttributes) {
+		try {
+			versionService.eliminarVersion(idVersion);
+			redirectAttributes.addFlashAttribute("success", "La versión ha sido eliminada exitosamente.");
+		} catch (Exception exception) {
+			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: no se ha podido eliminar la versión.");
 		}
 		return "redirect:/abm/versiones";
 	}
