@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.exception.ModeloExistsException;
 import marianoesteban.vtv.model.Marca;
 import marianoesteban.vtv.model.Modelo;
 import marianoesteban.vtv.repository.ModeloRepository;
@@ -29,6 +30,8 @@ public class ModeloServiceImpl implements ModeloService {
 
 	@Override
 	public Modelo agregarModelo(Modelo modelo) {
+		if (modeloRepository.existsByMarcaAndNombre(modelo.getMarca(), modelo.getNombre()))
+			throw new ModeloExistsException("Ya existe el modelo de automóvil");
 		return modeloRepository.save(modelo);
 	}
 

@@ -13,4 +13,5 @@ public interface ModeloRepository extends CrudRepository<Modelo, Long> {
 
 	List<Modelo> findAll();
 	List<Modelo> findByMarca(Marca marca);
+	boolean existsByMarcaAndNombre(Marca marca, String nombre);
 }

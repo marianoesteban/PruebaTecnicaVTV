@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Modelo {
@@ -20,6 +21,7 @@ public class Modelo {
 	@JoinColumn(name="id_marca")
 	private Marca marca;
 	
+	@NotBlank(message="Debe especificar el modelo")
 	private String nombre;
 	
 	public Modelo() {
