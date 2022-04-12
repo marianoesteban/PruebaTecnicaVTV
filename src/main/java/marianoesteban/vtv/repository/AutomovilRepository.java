@@ -16,4 +16,5 @@ public interface AutomovilRepository extends CrudRepository<Automovil, Long> {
 	Automovil findById(long id);
 	@Query(value="SELECT a FROM Automovil a INNER JOIN Inspeccion i1 ON a = i1.automovil WHERE i1.fechaInspeccion = (SELECT MAX(i2.fechaInspeccion) FROM Inspeccion i2 WHERE i1.automovil = i2.automovil) AND i1.estadoInspeccion = :estadoInspeccion")
 	List<Automovil> findByLastEstadoInspeccion(@Param("estadoInspeccion") String estadoInspeccion);
+	boolean existsByDominio(String dominio);
 }

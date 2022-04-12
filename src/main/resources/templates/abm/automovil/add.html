@@ -11,7 +11,8 @@
         <form th:object="${automovil}" method="POST">
             <div class="form-group">
                 <label for="inputDominio">Dominio</label>
-                <input type="text" class="form-control" id="inputDominio" th:field="*{dominio}" th:required="required" />
+                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('dominio') ? 'is-invalid' : ''}" id="inputDominio" th:field="*{dominio}" th:required="required" />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('dominio')}" th:errors="*{dominio}" />
             </div>
             <div class="form-group">
                 <label for="selectMarca">Marca</label>

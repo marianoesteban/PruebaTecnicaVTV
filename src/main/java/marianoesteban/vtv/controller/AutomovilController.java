@@ -2,9 +2,12 @@ package marianoesteban.vtv.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,10 +51,13 @@ public class AutomovilController {
 	}
 
 	@PostMapping("/abm/automoviles/agregar")
-	public String addAutomovil(@ModelAttribute Automovil automovil, Model model,
+	public String addAutomovil(@Valid @ModelAttribute Automovil automovil, BindingResult bindingResult, Model model,
 			final RedirectAttributes redirectAttributes) {
-		// TODO: chequear que no haya otro auto con el mismo dominio
-		// TODO: chequear que el dominio sea válido
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("marcas", marcaService.listarMarcas());
+			model.addAttribute("propietarios", propietarioService.listarPropietarios());
+			return "abm/automovil/add";
+		}
 		try {
 			automovilService.agregarAutomovil(automovil);
 			redirectAttributes.addFlashAttribute("success", "El automóvil se agregó exitosamente.");
