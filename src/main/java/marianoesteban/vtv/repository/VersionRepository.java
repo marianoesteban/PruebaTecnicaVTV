@@ -13,4 +13,5 @@ public interface VersionRepository extends CrudRepository<Version, Long> {
 
 	List<Version> findAll();
 	List<Version> findByModelo(Modelo modelo);
+	boolean existsByModeloAndNombre(Modelo modelo, String nombre);
 }

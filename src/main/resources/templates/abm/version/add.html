@@ -23,7 +23,8 @@
             </div>
             <div class="form-group">
                 <label for="inputVersion">Versión</label>
-                <input type="text" class="form-control" id="inputVersion" th:field="*{nombre}" th:required="required" />
+                <input type="text" class="form-control" th:classappend="${#fields.hasErrors('nombre') ? 'is-invalid' : ''}" id="inputVersion" th:field="*{nombre}" th:required="required" />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" />
             </div>
             <button type="submit" class="btn btn-success btn-block">Agregar</button>
         </form>

@@ -2,9 +2,12 @@ package marianoesteban.vtv.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import marianoesteban.vtv.exception.VersionExistsException;
 import marianoesteban.vtv.model.Marca;
 import marianoesteban.vtv.model.Version;
 import marianoesteban.vtv.service.MarcaService;
@@ -45,11 +49,17 @@ public class VersionController {
 	}
 
 	@PostMapping("/abm/versiones/agregar")
-	public String addVersion(@ModelAttribute Version version, Model model,
+	public String addVersion(@Valid @ModelAttribute Version version, BindingResult bindingResult, Model model,
 			final RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("marcas", marcaService.listarMarcas());
+			return "abm/version/add";
+		}
 		try {
 			versionService.agregarVersion(version);
 			redirectAttributes.addFlashAttribute("success", "La versión se agregó exitosamente.");
+		} catch (VersionExistsException versionExistsException) {
+			redirectAttributes.addFlashAttribute("error", "La versión especificada del automóvil ya existe.");
 		} catch (Exception exception) {
 			redirectAttributes.addFlashAttribute("error", "Ha ocurrido un error: la versión no se ha podido agregar");
 		}

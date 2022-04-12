@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Version {
@@ -20,6 +21,7 @@ public class Version {
 	@JoinColumn(name="id_modelo")
 	private Modelo modelo;
 	
+	@NotBlank(message="Debe especificar la versión")
 	private String nombre;
 	
 	public Version() {

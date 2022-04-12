@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import marianoesteban.vtv.exception.VersionExistsException;
 import marianoesteban.vtv.model.Modelo;
 import marianoesteban.vtv.model.Version;
 import marianoesteban.vtv.repository.VersionRepository;
@@ -29,6 +30,8 @@ public class VersionServiceImpl implements VersionService {
 
 	@Override
 	public Version agregarVersion(Version version) {
+		if (versionRepository.existsByModeloAndNombre(version.getModelo(), version.getNombre()))
+			throw new VersionExistsException("Ya existe esa versión de automóvil");
 		return versionRepository.save(version);
 	}
 
