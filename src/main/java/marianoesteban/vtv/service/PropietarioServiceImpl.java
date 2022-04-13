@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import marianoesteban.vtv.exception.DniExistsException;
+import marianoesteban.vtv.exception.NotFoundException;
 import marianoesteban.vtv.model.Propietario;
 import marianoesteban.vtv.repository.PropietarioRepository;
 
@@ -33,6 +34,9 @@ public class PropietarioServiceImpl implements PropietarioService {
 
 	@Override
 	public Propietario editarPropietario(long idPropietario, Propietario propietario) {
+		if (propietarioRepository.findById(idPropietario) == null)
+			throw new NotFoundException("No se encontró el propietario");
+
 		// si el DNI cambió
 		if (!propietarioRepository.findDniById(idPropietario).equals(propietario.getDni()))
 			chequearDniUnico(propietario.getDni());
@@ -42,6 +46,9 @@ public class PropietarioServiceImpl implements PropietarioService {
 
 	@Override
 	public void eliminarPropietario(long idPropietario) {
+		if (propietarioRepository.findById(idPropietario) == null)
+			throw new NotFoundException("No se encontró el propietario");
+
 		propietarioRepository.deleteById(idPropietario);
 	}
 
